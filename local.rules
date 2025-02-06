@@ -1,0 +1,15 @@
+# $Id: local.rules,v 1.11 2004/07/23 20:15:44 bmc Exp $
+# ----------------
+# LOCAL RULES
+# ----------------
+# This file intentionally does not come with signatures.  Put your local
+# additions here.
+
+
+alert icmp 192.168.70.6 any -> 192.168.70.5 any (msg:"ICMP message detected"; sid:2000001;)
+
+alert tcp 192.168.70.6 any -> 192.168.70.5 1:1023 (msg:"Possible port scan - SYN packets"; flags:S; threshold: type both, track by_src, count 10, seconds 5; classtype:attempted-recon; sid:100001; rev:1;)
+
+alert tcp any any -> 192.168.70.5 80 (msg:"SYN flood detected"; flags:S; threshold:type both, track by_src, count 20, seconds 5; classtype:attempted-dos; sid:100002; rev:1;)
+
+alert tcp 192.168.70.6 any -> 192.168.70.5 22 (msg:"Rogue SSH Connection - Malicious Version"; content:"SSH-2.0-OpenSSH_7.6p1"; sid:1000005; rev:1;)
