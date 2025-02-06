@@ -117,7 +117,7 @@ Configure target and scanning parameters:
 
 ```
 set RHOSTS 192.168.70.5
-set INTERFACE enp0s8
+set INTERFACE your-interface
 set PORTS 1-500
 ```
 Start Wireshark on Server A to capture the scanning traffic. 
@@ -186,7 +186,7 @@ ssh 192.168.70.5
 ```
 and see matching alerts from snort on Server A using command:
 ```
-sudo snort -i enp0s7 -A console -c /etc/snort/snort.conf
+sudo snort -i (your-interface) -A console -c /etc/snort/snort.conf
 ```
 This rule effectively detects port scanning by monitoring rapid bursts of `SYN` packets sent to multiple ports, a common pattern in scanning activities that do not complete the `TCP` handshake. In contrast, benign traffic like `SSH` or `Telnet` typically completes the handshake and limits `SYN` packets to a single port. The threshold condition further ensures that routine connection attempts do not trigger false alerts.
 
@@ -200,7 +200,7 @@ From Server B, we will configure the module to attack Server A (192.168.70.5) ov
 Set Module Parameters:
 ```
 set RHOSTS 192.168.70.5
-set INTERFACE enp0s8
+set INTERFACE your-interface
 set PORTS 80
 set FLOODTIME 30
 ```
@@ -211,8 +211,7 @@ We can see the high volume of `SYN` requests without completion of the `TCP` han
 
 Create a snort rule to detect high-frequency `SYN` packets:
 ```
-alert tcp any any -> 192.168.70.5 80 (msg:"SYN flood detected"; flags:S; threshold:type both, track
-by_src, count 20, seconds 5; classtype:attempted-dos; sid:100002; rev:1;)
+alert tcp any any -> 192.168.70.5 80 (msg:"SYN flood detected"; flags:S; threshold:type both, track by_src, count 20, seconds 5; classtype:attempted-dos; sid:100002; rev:1;)
 ```
 To verify the Snort Rule Detects Port Scanning, we use the command `run` on Server B and see matching alerts from snort on Server A using command: 
 ```
