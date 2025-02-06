@@ -285,9 +285,10 @@ And, it will not show any alerts when running SSH.
 
 [Wireshark User Guide](https://www.wireshark.org/docs/wsug_html_chunked/)
 
-In this project, I will provide you only the following:
-snort.conf: The main Snort configuration file.
-local.rules: Custom Snort rules created for the lab.
-account.txt: A file for the last implementation.
+#### In this project, I will provide you only the following:
+
+`snort.conf`: The main Snort configuration file.
+`local.rules`: Custom Snort rules created for the lab.
+`account.txt`: A file for the last implementation.
 
 Good Luck!
