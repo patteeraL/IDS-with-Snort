@@ -287,8 +287,8 @@ And, it will not show any alerts when running SSH.
 
 #### In this project, I will provide you only the following:
 
-`snort.conf`: The main Snort configuration file.
-`local.rules`: Custom Snort rules created for the lab.
-`account.txt`: A file for the last implementation.
+- `snort.conf`: The main Snort configuration file.
+- `local.rules`: Custom Snort rules created for the lab.
+- `account.txt`: A file for the last implementation.
 
 Good Luck!
